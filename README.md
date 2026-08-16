@@ -32,6 +32,12 @@ TELEGRAM_CHAT_ID=your-chat-id
 Without these, `POST /api/book` still responds successfully but simulates the Telegram push
 instead of sending it — useful for local development without live credentials.
 
+## Deploy
+
+Deploys on Vercel out of the box — no `vercel.json` needed. After importing the repo, set
+`TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the project's Environment Variables settings
+(without them the booking API simulates success instead of notifying Telegram).
+
 ## Scripts
 
 - `npm run dev` — start the dev server
