@@ -47,11 +47,11 @@ export function Step3Success({
 
   const whatsappMessage = [
     `Salam, ${contact.masterFirstName} bəy! Mən saytdan qeydiyyatdan keçdim:`,
-    `\u{1F487} Xidmət: ${service.title}`,
-    `\u{1F4CF} Saç uzunluğu: ${hairLength.label} (${hairLength.description})`,
-    `\u{1F464} Adım: ${formData.name}`,
-    `\u{1F4DE} Nömrəm: ${formData.phone}`,
-    `\u{1F4AC} Qeyd: ${formData.comment || "Qeyd yoxdur"}`,
+    `Xidmət: ${service.title}`,
+    `Saç uzunluğu: ${hairLength.label} (${hairLength.description})`,
+    `Adım: ${formData.name}`,
+    `Nömrəm: ${formData.phone}`,
+    `Qeyd: ${formData.comment || "Qeyd yoxdur"}`,
   ].join("\n");
 
   const whatsappUrl = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(
