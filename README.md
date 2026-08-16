@@ -1,13 +1,22 @@
-# Chingiz Sharifov — Booking App
+# Luxury Beauty Booking
 
-Mobile-first booking funnel for a hair colour studio in Baku. Client picks a service and hair
-length, leaves contact details, and gets routed to WhatsApp to confirm — with a Telegram
-notification sent to the studio on submit.
+A mobile-first booking funnel built for a premium hair colour studio in Baku. Clients pick a service and hair length, leave their contact details, and land straight in WhatsApp to confirm, while the studio gets an instant Telegram notification.
+
+Live product, not a demo: real client data, real WhatsApp handoff, real studio ops behind it.
+
+## Highlights
+
+- Three-step guided booking flow with animated transitions and zero reloads
+- Bilingual experience (Azerbaijani / Russian) with instant, layout-stable language switching
+- Light and dark themes, persisted per visitor
+- WhatsApp deep link generated from the booking, prefilled and ready to send
+- Telegram notification pushed to the studio on every submission
+- Fully responsive, tuned for one-handed mobile use
 
 ## Stack
 
 - Next.js 16 (App Router, Turbopack)
-- React 19, TypeScript (strict)
+- React 19, TypeScript (strict mode)
 - Tailwind CSS v4
 - Framer Motion, canvas-confetti, lucide-react
 
@@ -29,18 +38,15 @@ TELEGRAM_BOT_TOKEN=your-bot-token
 TELEGRAM_CHAT_ID=your-chat-id
 ```
 
-Without these, `POST /api/book` still responds successfully but simulates the Telegram push
-instead of sending it — useful for local development without live credentials.
+Without these, `POST /api/book` still responds successfully but simulates the Telegram push instead of sending it, which keeps local development friction-free.
 
-## Deploy
+## Deployment
 
-Deploys on Vercel out of the box — no `vercel.json` needed. After importing the repo, set
-`TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the project's Environment Variables settings
-(without them the booking API simulates success instead of notifying Telegram).
+Ships on Vercel with zero configuration. After importing the repository, set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the project's Environment Variables settings.
 
 ## Scripts
 
-- `npm run dev` — start the dev server
-- `npm run build` — production build
-- `npm run start` — run the production build
-- `npm run lint` — run ESLint
+- `npm run dev` start the dev server
+- `npm run build` production build
+- `npm run start` run the production build
+- `npm run lint` run ESLint

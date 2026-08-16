@@ -45,6 +45,8 @@ next-env.d.ts
 .idea
 .vscode
 
-# agent-generated docs (auto-recreated by `next dev`, local only)
+# AI tooling config (local only, never part of the repo)
+.claude/
+.claude*
 AGENTS.md
 CLAUDE.md
