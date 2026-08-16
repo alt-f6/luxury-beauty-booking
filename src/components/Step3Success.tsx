@@ -21,7 +21,7 @@ export function Step3Success({
     const duration = 1200;
     const end = Date.now() + duration;
 
-    const colors = ["#D4AF37", "#C5A059", "#FFFFFF"];
+    const colors = ["#D4AF37", "#C5A059", "#1C3F36"];
 
     (function frame() {
       confetti({
@@ -47,11 +47,11 @@ export function Step3Success({
 
   const whatsappMessage = [
     `Salam, ${contact.masterFirstName} bəy! Mən saytdan qeydiyyatdan keçdim:`,
-    `Xidmət: ${service.title}`,
-    `Saç uzunluğu: ${hairLength.label} (${hairLength.description})`,
-    `Adım: ${formData.name}`,
-    `Nömrəm: ${formData.phone}`,
-    `Qeyd: ${formData.comment || "Qeyd yoxdur"}`,
+    `\u{1F487} Xidmət: ${service.title}`,
+    `\u{1F4CF} Saç uzunluğu: ${hairLength.label} (${hairLength.description})`,
+    `\u{1F464} Adım: ${formData.name}`,
+    `\u{1F4DE} Nömrəm: ${formData.phone}`,
+    `\u{1F4AC} Qeyd: ${formData.comment || "Qeyd yoxdur"}`,
   ].join("\n");
 
   const whatsappUrl = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(
@@ -77,19 +77,19 @@ export function Step3Success({
       <div className="glass-card flex w-full flex-col gap-2 rounded-2xl px-4 py-4 text-left">
         <div className="flex justify-between text-sm">
           <span className="text-text-secondary">Xidmət</span>
-          <span className="font-medium text-white">{service.title}</span>
+          <span className="font-medium text-foreground">{service.title}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-text-secondary">Uzunluq</span>
-          <span className="font-medium text-white">{hairLength.label}</span>
+          <span className="font-medium text-foreground">{hairLength.label}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-text-secondary">Ad</span>
-          <span className="font-medium text-white">{formData.name}</span>
+          <span className="font-medium text-foreground">{formData.name}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-text-secondary">Telefon</span>
-          <span className="font-medium text-white">{formData.phone}</span>
+          <span className="font-medium text-foreground">{formData.phone}</span>
         </div>
       </div>
 

@@ -56,13 +56,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg">
+    <div className="min-h-screen bg-bg">
       <div className="mx-auto flex min-h-screen w-full max-w-md flex-1 flex-col">
         <HeroHeader />
 
         {step < 3 && (
           <div className="mx-4 mb-2 flex items-center gap-2">
-            <div className="h-1 flex-1 overflow-hidden rounded-full bg-dark-card">
+            <div className="h-1 flex-1 overflow-hidden rounded-full bg-surface-strong">
               <div
                 className="h-full rounded-full bg-gold transition-all duration-300"
                 style={{ width: step === 1 ? "50%" : "100%" }}

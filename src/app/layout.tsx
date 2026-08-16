@@ -25,9 +25,17 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#0a0a0c",
-  colorScheme: "dark",
+  themeColor: "#f8f7f5",
+  colorScheme: "light dark",
 };
+
+const themeInitScript = `
+  try {
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  } catch (e) {}
+`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -35,7 +43,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="az"
       className={`${cormorantGaramond.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-dark-bg font-sans">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-bg font-sans">
         {children}
       </body>
     </html>

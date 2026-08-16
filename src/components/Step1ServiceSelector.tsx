@@ -24,7 +24,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
   return (
     <section className="flex flex-col gap-6 px-4 pb-28">
       <div className="text-center">
-        <h2 className="font-serif text-2xl font-semibold text-white">
+        <h2 className="font-serif text-2xl font-semibold text-foreground">
           Xidməti seçin
         </h2>
         <p className="mt-1 text-sm text-text-secondary">
@@ -44,8 +44,8 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
               transition={{ duration: 0.2, ease: "easeOut" }}
               className={`flex items-center gap-3 rounded-xl border p-2.5 text-left transition-colors ${
                 isActive
-                  ? "border-gold/50 bg-gold/[0.06]"
-                  : "border-white/10 hover:border-white/20"
+                  ? "border-gold bg-gold/10"
+                  : "border-border hover:border-border-strong"
               }`}
             >
               <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
@@ -59,7 +59,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
               </div>
 
               <div className="min-w-0 flex-1">
-                <h3 className="font-serif text-base font-semibold tracking-wide text-white">
+                <h3 className="font-serif text-base font-semibold tracking-wide text-foreground">
                   {service.title}
                 </h3>
                 <p className="mt-0.5 truncate text-xs text-text-secondary">
@@ -74,7 +74,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
                 className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
                   isActive
                     ? "border-gold bg-gold text-black"
-                    : "border-white/15 text-transparent"
+                    : "border-border text-transparent"
                 }`}
               >
                 <Check className="h-3 w-3" />
@@ -85,7 +85,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-white">Saç uzunluğu</span>
+        <span className="text-sm font-medium text-foreground">Saç uzunluğu</span>
         <div className="flex gap-2">
           {hairLengths.map((length) => {
             const isActive = length.id === hairLengthId;
@@ -97,7 +97,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
                 className={`flex-1 rounded-full border px-2 py-2.5 text-center transition-colors ${
                   isActive
                     ? "border-gold bg-gold/10 text-gold"
-                    : "border-white/15 text-text-secondary hover:border-white/25"
+                    : "border-border text-text-secondary hover:border-border-strong"
                 }`}
               >
                 <span className="flex flex-col items-center gap-0.5">
@@ -116,12 +116,12 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
         </div>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-md border-t border-border-default bg-dark-bg/95 p-4 backdrop-blur-md">
+      <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-md border-t border-border bg-bg/95 p-4 backdrop-blur-md">
         <button
           type="button"
           disabled={!isComplete}
           onClick={handleContinue}
-          className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:bg-dark-card disabled:text-text-secondary enabled:bg-gold enabled:text-black active:enabled:scale-[0.98]"
+          className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:bg-surface-strong disabled:text-text-secondary enabled:bg-gold enabled:text-black active:enabled:scale-[0.98]"
         >
           Davam et
           <ArrowRight className="h-4 w-4" />

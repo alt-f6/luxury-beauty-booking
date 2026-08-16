@@ -1,21 +1,27 @@
 import Image from "next/image";
 import { MapPin, Sparkles } from "lucide-react";
 import { contact } from "@/data/contact";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const AVATAR_URL = "/photos/chingiz_photo.jpg";
 
 export function HeroHeader() {
   return (
     <header className="flex flex-col items-center gap-4 px-6 pt-10 pb-6 text-center">
-      <div className="relative h-24 w-24 overflow-hidden rounded-full border-[1.5px] border-gold shadow-[0_0_20px_rgba(212,175,55,0.25)]">
-        <Image
-          src={AVATAR_URL}
-          alt={contact.masterName}
-          fill
-          sizes="96px"
-          priority
-          className="object-cover"
-        />
+      <div className="relative flex w-full items-center justify-center">
+        <div className="relative h-24 w-24 overflow-hidden rounded-full border-[1.5px] border-gold shadow-[0_0_20px_rgba(212,175,55,0.25)]">
+          <Image
+            src={AVATAR_URL}
+            alt={contact.masterName}
+            fill
+            sizes="96px"
+            priority
+            className="object-cover"
+          />
+        </div>
+        <div className="absolute right-0 top-0">
+          <ThemeToggle />
+        </div>
       </div>
 
       <div className="flex flex-col items-center gap-1.5">
@@ -23,7 +29,7 @@ export function HeroHeader() {
           {contact.masterName.toUpperCase()}
         </h1>
 
-        <span className="rounded-full border border-border-default bg-dark-card px-3 py-1 text-xs font-medium uppercase tracking-wider text-text-secondary">
+        <span className="rounded-full border border-border bg-surface-strong px-3 py-1 text-xs font-medium uppercase tracking-wider text-text-secondary">
           {contact.role} &bull; {contact.salon}
         </span>
 
@@ -40,7 +46,7 @@ export function HeroHeader() {
 
       <div className="glass-card flex items-center gap-2 rounded-full px-4 py-2">
         <span className="h-2 w-2 rounded-full bg-gold animate-pulse-dot" />
-        <span className="text-xs font-medium text-white">
+        <span className="text-xs font-medium text-foreground">
           Bu həftəyə son 3 sərbəst yer
         </span>
       </div>

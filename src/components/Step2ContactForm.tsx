@@ -42,7 +42,7 @@ function extractPhoneDigits(raw: string) {
 }
 
 const inputClasses =
-  "w-full rounded-xl border border-border-default bg-dark-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/60 outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold";
+  "w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground placeholder:text-text-secondary/60 outline-none transition-colors focus:border-gold focus:ring-1 focus:ring-gold";
 
 export function Step2ContactForm({
   service,
@@ -123,7 +123,7 @@ export function Step2ContactForm({
       <button
         type="button"
         onClick={onBack}
-        className="w-fit text-sm text-text-secondary transition-colors hover:text-white"
+        className="w-fit text-sm text-text-secondary transition-colors hover:text-foreground"
       >
         ← Geri
       </button>
@@ -133,14 +133,14 @@ export function Step2ContactForm({
           <span className="text-xs uppercase tracking-wide text-text-secondary">
             Seçiminiz
           </span>
-          <span className="text-sm font-medium text-white">
+          <span className="text-sm font-medium text-foreground">
             {service.title} &bull; {hairLength.label}
           </span>
         </div>
         <button
           type="button"
           onClick={onBack}
-          className="flex items-center gap-1 rounded-full border border-border-default px-3 py-1.5 text-xs font-medium text-gold transition-colors hover:bg-gold/10"
+          className="flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-gold transition-colors hover:bg-gold/10"
         >
           <Pencil className="h-3 w-3" />
           Dəyiş
@@ -149,7 +149,7 @@ export function Step2ContactForm({
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="name" className="text-sm font-medium text-white">
+          <label htmlFor="name" className="text-sm font-medium text-foreground">
             Adınız
           </label>
           <input
@@ -166,7 +166,7 @@ export function Step2ContactForm({
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="phone" className="text-sm font-medium text-white">
+          <label htmlFor="phone" className="text-sm font-medium text-foreground">
             Telefon nömrəniz
           </label>
           <input
@@ -186,7 +186,7 @@ export function Step2ContactForm({
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="comment" className="text-sm font-medium text-white">
+          <label htmlFor="comment" className="text-sm font-medium text-foreground">
             Əlavə qeyd
           </label>
           <textarea
