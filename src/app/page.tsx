@@ -7,13 +7,8 @@ import { Step1ServiceSelector } from "@/components/Step1ServiceSelector";
 import { Step2ContactForm } from "@/components/Step2ContactForm";
 import { Step3Success } from "@/components/Step3Success";
 import { hairLengths, services } from "@/data/services";
+import { useLanguage } from "@/context/LanguageContext";
 import type { BookingFormData, ContactDraft, StepState } from "@/types/booking";
-
-const stepLabels: Record<StepState, string> = {
-  1: "Addım 1 / 2",
-  2: "Addım 2 / 2",
-  3: "Hazırdır!",
-};
 
 const slideTransition = {
   initial: { opacity: 0, x: 30 },
@@ -23,6 +18,7 @@ const slideTransition = {
 };
 
 export default function Home() {
+  const { t } = useLanguage();
   const [step, setStep] = useState<StepState>(1);
   const [selection, setSelection] = useState<{
     serviceId: string;
@@ -69,7 +65,7 @@ export default function Home() {
               />
             </div>
             <span className="whitespace-nowrap text-xs text-text-secondary">
-              {stepLabels[step]}
+              {t.steps[step]}
             </span>
           </div>
         )}

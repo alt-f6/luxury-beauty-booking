@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { CheckCircle2 } from "lucide-react";
 import { contact } from "@/data/contact";
+import { useLanguage } from "@/context/LanguageContext";
 import type { BookingFormData, HairLength, ServiceItem } from "@/types/booking";
 
 interface Step3SuccessProps {
@@ -17,6 +18,12 @@ export function Step3Success({
   service,
   hairLength,
 }: Step3SuccessProps) {
+  const { t } = useLanguage();
+  const serviceText =
+    t.step1.services[service.id as keyof typeof t.step1.services];
+  const lengthText =
+    t.step1.hairLengths[hairLength.id as keyof typeof t.step1.hairLengths];
+
   useEffect(() => {
     const duration = 1200;
     const end = Date.now() + duration;
@@ -46,12 +53,14 @@ export function Step3Success({
   }, []);
 
   const whatsappMessage = [
-    `Salam, ${contact.masterFirstName} bəy! Mən saytdan qeydiyyatdan keçdim:`,
-    `\u{1F487} Xidmət: ${service.title}`,
-    `\u{1F4CF} Saç uzunluğu: ${hairLength.label} (${hairLength.description})`,
-    `\u{1F464} Adım: ${formData.name}`,
-    `\u{1F4DE} Nömrəm: ${formData.phone}`,
-    `\u{1F4AC} Qeyd: ${formData.comment || "Qeyd yoxdur"}`,
+    t.step3.whatsapp.greeting(contact.masterFirstName),
+    t.step3.whatsapp.serviceLine(serviceText.title),
+    t.step3.whatsapp.lengthLine(`${lengthText.label} (${lengthText.description})`),
+    t.step3.whatsapp.nameLine(formData.name),
+    t.step3.whatsapp.phoneLine(formData.phone),
+    t.step3.whatsapp.commentLine(
+      formData.comment || t.step3.whatsapp.noComment,
+    ),
   ].join("\n");
 
   const whatsappUrl = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(
@@ -66,29 +75,32 @@ export function Step3Success({
 
       <div className="flex flex-col gap-2">
         <h2 className="font-serif text-2xl font-semibold text-gold">
-          Qeydiyyatınız uğurla qəbul edildi!
+          {t.step3.title}
         </h2>
         <p className="text-sm text-text-secondary">
-          {contact.masterFirstName} bəy ən qısa zamanda sizinlə əlaqə
-          saxlayacaq.
+          {t.step3.subtitle(contact.masterFirstName)}
         </p>
       </div>
 
       <div className="glass-card flex w-full flex-col gap-2 rounded-2xl px-4 py-4 text-left">
         <div className="flex justify-between text-sm">
-          <span className="text-text-secondary">Xidmət</span>
-          <span className="font-medium text-foreground">{service.title}</span>
+          <span className="text-text-secondary">{t.step3.serviceLabel}</span>
+          <span className="font-medium text-foreground">
+            {serviceText.title}
+          </span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-text-secondary">Uzunluq</span>
-          <span className="font-medium text-foreground">{hairLength.label}</span>
+          <span className="text-text-secondary">{t.step3.lengthLabel}</span>
+          <span className="font-medium text-foreground">
+            {lengthText.label}
+          </span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-text-secondary">Ad</span>
+          <span className="text-text-secondary">{t.step3.nameLabel}</span>
           <span className="font-medium text-foreground">{formData.name}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-text-secondary">Telefon</span>
+          <span className="text-text-secondary">{t.step3.phoneLabel}</span>
           <span className="font-medium text-foreground">{formData.phone}</span>
         </div>
       </div>
@@ -100,7 +112,7 @@ export function Step3Success({
         className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] py-3.5 text-sm font-semibold text-black transition-colors hover:bg-[#1EBE5D] active:scale-[0.98]"
       >
         <span className="animate-pulse-dot">{"\u{1F4AC}"}</span>
-        WhatsApp ilə dərhal təsdiqləyin
+        {t.step3.whatsappCta}
       </a>
     </section>
   );

@@ -5,12 +5,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { hairLengths, services } from "@/data/services";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Step1ServiceSelectorProps {
   onComplete: (selection: { serviceId: string; hairLengthId: string }) => void;
 }
 
 export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) {
+  const { t } = useLanguage();
   const [serviceId, setServiceId] = useState<string | null>(null);
   const [hairLengthId, setHairLengthId] = useState<string | null>(null);
 
@@ -25,16 +27,18 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
     <section className="flex flex-col gap-6 px-4 pb-28">
       <div className="text-center">
         <h2 className="font-serif text-2xl font-semibold text-foreground">
-          Xidməti seçin
+          {t.step1.title}
         </h2>
         <p className="mt-1 text-sm text-text-secondary">
-          Sizə uyğun texnikanı və saç uzunluğunu seçin
+          {t.step1.subtitle}
         </p>
       </div>
 
       <div className="flex flex-col gap-2">
         {services.map((service) => {
           const isActive = service.id === serviceId;
+          const serviceText =
+            t.step1.services[service.id as keyof typeof t.step1.services];
           return (
             <motion.button
               key={service.id}
@@ -51,7 +55,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
               <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
                 <Image
                   src={service.imageUrl}
-                  alt={service.title}
+                  alt={serviceText.title}
                   fill
                   sizes="64px"
                   className="object-cover"
@@ -60,13 +64,13 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
 
               <div className="min-w-0 flex-1">
                 <h3 className="font-serif text-base font-semibold tracking-wide text-foreground">
-                  {service.title}
+                  {serviceText.title}
                 </h3>
                 <p className="mt-0.5 truncate text-xs text-text-secondary">
-                  {service.description}
+                  {serviceText.description}
                 </p>
                 <span className="mt-1 block text-[10px] uppercase tracking-wider text-gold/70">
-                  {service.badge}
+                  {serviceText.badge}
                 </span>
               </div>
 
@@ -85,10 +89,16 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-foreground">Saç uzunluğu</span>
+        <span className="text-sm font-medium text-foreground">
+          {t.step1.hairLengthLabel}
+        </span>
         <div className="flex gap-2">
           {hairLengths.map((length) => {
             const isActive = length.id === hairLengthId;
+            const lengthText =
+              t.step1.hairLengths[
+                length.id as keyof typeof t.step1.hairLengths
+              ];
             return (
               <button
                 key={length.id}
@@ -101,13 +111,15 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
                 }`}
               >
                 <span className="flex flex-col items-center gap-0.5">
-                  <span className="text-xs font-medium">{length.label}</span>
+                  <span className="text-xs font-medium">
+                    {lengthText.label}
+                  </span>
                   <span
                     className={`text-[10px] font-normal ${
                       isActive ? "text-gold/70" : "text-text-secondary"
                     }`}
                   >
-                    {length.description}
+                    {lengthText.description}
                   </span>
                 </span>
               </button>
@@ -123,7 +135,7 @@ export function Step1ServiceSelector({ onComplete }: Step1ServiceSelectorProps) 
           onClick={handleContinue}
           className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:bg-surface-strong disabled:text-text-secondary enabled:bg-gold enabled:text-black active:enabled:scale-[0.98]"
         >
-          Davam et
+          {t.step1.continueCta}
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>

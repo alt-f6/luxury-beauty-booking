@@ -1,15 +1,10 @@
 export interface ServiceItem {
   id: string;
-  title: string;
-  badge: string;
-  description: string;
   imageUrl: string;
 }
 
 export interface HairLength {
   id: string;
-  label: string;
-  description: string;
 }
 
 export interface BookingFormData {

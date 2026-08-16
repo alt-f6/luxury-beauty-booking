@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Loader2, Pencil } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 import type {
   BookingFormData,
   ContactDraft,
@@ -52,6 +53,11 @@ export function Step2ContactForm({
   onBack,
   onSuccess,
 }: Step2ContactFormProps) {
+  const { t } = useLanguage();
+  const serviceText =
+    t.step1.services[service.id as keyof typeof t.step1.services];
+  const lengthText =
+    t.step1.hairLengths[hairLength.id as keyof typeof t.step1.hairLengths];
   const { name, phoneDigits, comment } = draft;
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
@@ -68,12 +74,14 @@ export function Step2ContactForm({
   const validate = () => {
     const nextErrors: { name?: string; phone?: string } = {};
     if (name.trim().length < 2) {
-      nextErrors.name = "Adınız ən azı 2 simvol olmalıdır";
+      nextErrors.name = t.step2.errors.nameTooShort;
     }
     if (phoneDigits.length !== 9) {
-      nextErrors.phone = "Telefon nömrəsi tam daxil edilməyib";
+      nextErrors.phone = t.step2.errors.phoneIncomplete;
     } else if (!AZ_MOBILE_PREFIXES.includes(phoneDigits.slice(0, 2))) {
-      nextErrors.phone = `Operator kodu düzgün deyil (${AZ_MOBILE_PREFIXES.join(", ")})`;
+      nextErrors.phone = t.step2.errors.phoneInvalidPrefix(
+        AZ_MOBILE_PREFIXES.join(", "),
+      );
     }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -101,8 +109,8 @@ export function Step2ContactForm({
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
-          service: service.title,
-          length: `${hairLength.label} (${hairLength.description})`,
+          service: serviceText.title,
+          length: `${lengthText.label} (${lengthText.description})`,
           comment: formData.comment,
         }),
       });
@@ -113,7 +121,7 @@ export function Step2ContactForm({
 
       onSuccess(formData);
     } catch {
-      setSubmitError("Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.");
+      setSubmitError(t.step2.errors.submitFailed);
       setIsLoading(false);
     }
   };
@@ -125,16 +133,16 @@ export function Step2ContactForm({
         onClick={onBack}
         className="w-fit text-sm text-text-secondary transition-colors hover:text-foreground"
       >
-        ← Geri
+        {t.step2.back}
       </button>
 
       <div className="glass-card flex items-center justify-between rounded-2xl px-4 py-3">
         <div className="flex flex-col gap-0.5">
           <span className="text-xs uppercase tracking-wide text-text-secondary">
-            Seçiminiz
+            {t.step2.yourChoice}
           </span>
           <span className="text-sm font-medium text-foreground">
-            {service.title} &bull; {hairLength.label}
+            {serviceText.title} &bull; {lengthText.label}
           </span>
         </div>
         <button
@@ -143,21 +151,21 @@ export function Step2ContactForm({
           className="flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-gold transition-colors hover:bg-gold/10"
         >
           <Pencil className="h-3 w-3" />
-          Dəyiş
+          {t.step2.change}
         </button>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="name" className="text-sm font-medium text-foreground">
-            Adınız
+            {t.step2.nameLabel}
           </label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="Məsələn: Aysel Məmmədova"
+            placeholder={t.step2.namePlaceholder}
             className={inputClasses}
           />
           {errors.name && (
@@ -167,7 +175,7 @@ export function Step2ContactForm({
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="phone" className="text-sm font-medium text-foreground">
-            Telefon nömrəniz
+            {t.step2.phoneLabel}
           </label>
           <input
             id="phone"
@@ -177,7 +185,7 @@ export function Step2ContactForm({
             onChange={(event) =>
               setPhoneDigits(extractPhoneDigits(event.target.value))
             }
-            placeholder="+994 (__) ___-__-__"
+            placeholder={t.step2.phonePlaceholder}
             className={inputClasses}
           />
           {errors.phone && (
@@ -187,14 +195,14 @@ export function Step2ContactForm({
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="comment" className="text-sm font-medium text-foreground">
-            Əlavə qeyd
+            {t.step2.commentLabel}
           </label>
           <textarea
             id="comment"
             rows={3}
             value={comment}
             onChange={(event) => setComment(event.target.value)}
-            placeholder="Arzu etdiyiniz tarix, vaxt və ya saçınızın hazırkı vəziyyəti..."
+            placeholder={t.step2.commentPlaceholder}
             className={`${inputClasses} resize-none`}
           />
         </div>
@@ -213,10 +221,10 @@ export function Step2ContactForm({
           {isLoading ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Göndərilir...
+              {t.step2.submitting}
             </>
           ) : (
-            "Qeydiyyatı təsdiqlə ✨"
+            t.step2.submitCta
           )}
         </button>
       </form>

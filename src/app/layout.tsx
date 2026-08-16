@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -34,6 +35,9 @@ const themeInitScript = `
     if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");
     }
+    if (localStorage.lang === "ru") {
+      document.documentElement.lang = "ru";
+    }
   } catch (e) {}
 `;
 
@@ -47,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full flex flex-col bg-bg font-sans">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
